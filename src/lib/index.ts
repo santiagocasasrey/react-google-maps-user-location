@@ -1,1 +1,1 @@
-export { default as UserLocatorButton } from "./components/UserLocatorButton";
+export { default as UserLocatorButton } from './components/UserLocatorButton';
