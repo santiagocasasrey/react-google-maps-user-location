@@ -1,0 +1,24 @@
+.center-on-me{
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+.gmapcontainer
+{
+    align-items: center;
+    background-color: #fff;
+    border-radius: 2px;
+    box-shadow: 0 1px 4px -1px #0000004d;
+    cursor: pointer;
+    display: flex;
+    height: 40px;
+    justify-content: center;
+    width: 40px;
+}
+.locatemelogo{
+    fill:#666
+}
+
+.locatemelogo:hover {
+    fill:black;
+}
