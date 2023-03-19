@@ -2,19 +2,20 @@ import React, { useRef, useEffect } from 'react';
 import './UserLocatorButton.css';
 
 interface UserLocatorButtonProps {
-  mapRef: React.RefObject<google.maps.Map>; //map reference
+  mapRef: React.RefObject<any>; //map reference
+  maps: any; //google map object
 }
 
-const UserLocatorButton = ({ mapRef }: UserLocatorButtonProps) => {
-  const marker = useRef<google.maps.Marker>();
-  const accuracyCircle = useRef<google.maps.Circle>();
+const UserLocatorButton = ({ mapRef, maps }: UserLocatorButtonProps) => {
+  const marker = useRef<any>(null);
+  const accuracyCircle = useRef<any>(null);
   useEffect(() => {
     getUserLocation(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const blueDot = {
-    path: google.maps.SymbolPath.CIRCLE,
+    path: maps.SymbolPath.CIRCLE,
     fillColor: '#4285F4',
     fillOpacity: 1,
     scale: 8,
@@ -36,7 +37,7 @@ const UserLocatorButton = ({ mapRef }: UserLocatorButtonProps) => {
     }
   };
 
-  const getUserLocation = (panToUser: boolean = true) => {
+  const getUserLocation = (panToUser: boolean) => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -55,7 +56,7 @@ const UserLocatorButton = ({ mapRef }: UserLocatorButtonProps) => {
           if (marker.current) {
             marker.current.setMap(null);
           }
-          marker.current = new google.maps.Marker({
+          marker.current = new maps.Marker({
             icon: blueDot,
             position: userLocation
           });
@@ -65,7 +66,7 @@ const UserLocatorButton = ({ mapRef }: UserLocatorButtonProps) => {
           if (accuracyCircle.current) {
             accuracyCircle.current.setMap(null);
           }
-          accuracyCircle.current = new google.maps.Circle({
+          accuracyCircle.current = new maps.Circle({
             center: userLocation,
             fillColor: '#61a0bf',
             fillOpacity: 0.4,
@@ -75,7 +76,7 @@ const UserLocatorButton = ({ mapRef }: UserLocatorButtonProps) => {
             strokeWeight: 1,
             zIndex: 1
           });
-          accuracyCircle.current.setMap(mapRef.current);
+          accuracyCircle.current?.setMap(mapRef.current);
         },
         (error) => {
           handleGeolocationError(error);
@@ -87,7 +88,7 @@ const UserLocatorButton = ({ mapRef }: UserLocatorButtonProps) => {
     }
   };
   return (
-    <div className="center-on-me" onClick={() => getUserLocation}>
+    <div className="center-on-me" onClick={() => getUserLocation(true)}>
       <div className="gmapcontainer">
         <svg
           xmlns="http://www.w3.org/2000/svg"

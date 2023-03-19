@@ -12,6 +12,7 @@
     "user location"
   ],
   "main": "dist/index.js",
+  "typings": "dist/index.d.ts",
   "module": "dist/index.js",
   "files": [
     "dist",
@@ -30,6 +31,7 @@
     "@types/node": "^16.18.16",
     "@types/react": "^18.0.28",
     "@types/react-dom": "^18.0.11",
+    "@types/google.maps": "^3.52.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
@@ -38,7 +40,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "rm -rf dist && NODE_ENV=production babel src/lib --out-dir dist --copy-files",
+    "build": "rm -rf dist && NODE_ENV=production babel src/lib --out-dir dist --copy-files --extensions '.ts,.tsx'",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "eslint .",
@@ -67,7 +69,7 @@
     "@babel/cli": "^7.21.0",
     "@babel/core": "^7.21.3",
     "@babel/preset-env": "^7.20.2",
-    "@types/google.maps": "^3.52.3",
+    "@babel/preset-typescript": "^7.21.0",
     "@typescript-eslint/eslint-plugin": "^5.55.0",
     "@typescript-eslint/parser": "^5.55.0",
     "eslint": "^8.36.0",
