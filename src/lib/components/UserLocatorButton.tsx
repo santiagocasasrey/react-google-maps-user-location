@@ -4,9 +4,10 @@ import './UserLocatorButton.css';
 interface UserLocatorButtonProps {
   mapRef: React.RefObject<any>; //map reference
   maps: any; //google map object
+  onError: (errorCode:number) => void;
 }
 
-const UserLocatorButton = ({ mapRef, maps }: UserLocatorButtonProps) => {
+const UserLocatorButton = ({ mapRef, maps, onError }: UserLocatorButtonProps) => {
   const marker = useRef<any>(null);
   const accuracyCircle = useRef<any>(null);
   useEffect(() => {
@@ -25,16 +26,10 @@ const UserLocatorButton = ({ mapRef, maps }: UserLocatorButtonProps) => {
 
   const handleGeolocationError = (error: any) => {
     if (error.code === 1) {
-      // permissionDenied
       marker.current?.setMap(null);
       accuracyCircle.current?.setMap(null);
-    } else if (error.code === 2) {
-      // positionUnavailable
-      console.log('positionUnavailable');
-    } else if (error.code === 3) {
-      // timeout
-      console.log('timeout');
     }
+    onError(error.code);
   };
 
   const getUserLocation = (panToUser: boolean) => {

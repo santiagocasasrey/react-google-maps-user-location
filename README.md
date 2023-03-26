@@ -42,6 +42,8 @@ const mapRef = useRef();
     }}>
 </GoogleMap>
 ```
+[WIKI](https://github.com/santiagocasasrey/react-google-maps-user-location/wiki)
+
 
 ## Caveats
 ### Required React Version
