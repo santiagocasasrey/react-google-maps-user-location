@@ -4,7 +4,7 @@ import './UserLocatorButton.css';
 interface UserLocatorButtonProps {
   mapRef: React.RefObject<any>; //map reference
   maps: any; //google map object
-  onError: (errorCode:number) => void;
+  onError?: (errorCode: number) => void;
 }
 
 const UserLocatorButton = ({ mapRef, maps, onError }: UserLocatorButtonProps) => {
@@ -29,7 +29,7 @@ const UserLocatorButton = ({ mapRef, maps, onError }: UserLocatorButtonProps) =>
       marker.current?.setMap(null);
       accuracyCircle.current?.setMap(null);
     }
-    onError(error.code);
+    onError && onError(error.code);
   };
 
   const getUserLocation = (panToUser: boolean) => {
